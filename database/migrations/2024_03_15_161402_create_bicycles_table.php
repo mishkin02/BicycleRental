@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('bicycles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('bicycle_model_id');
+            $table->foreign('bicycle_model_id')->references('id')->on('bicycle_models');
+            $table->boolean('status');
         });
     }
 

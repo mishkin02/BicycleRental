@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('models', function (Blueprint $table) {
+        Schema::create('bicycle_models', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name', 64);
+            $table->string('type', 32);
+            $table->integer('rental_price_hour');
+            $table->integer('rental_price_day');
         });
     }
 

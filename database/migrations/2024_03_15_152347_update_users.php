@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('first_name', 32)->nullable();
             $table->string('last_name', 32)->nullable();
-            $table->string('email', 100)->nullable();
             $table->string('phone_number', 18)->nullable();
         });
     }
@@ -26,7 +25,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
                 $table->dropColumn('first_name', 32);
                 $table->dropColumn('last_name', 32);
-                $table->dropColumn('email', 100);
                 $table->dropColumn('phone_number', 18);
             });
     }

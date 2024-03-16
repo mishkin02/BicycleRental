@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('customer_id');
+            $table->foreign('customer_id')->references('id')->on('users');
+            $table->integer('bicycle_id');
+            $table->foreign('bicycle_id')->references('id')->on('bicycles');
+            $table->date('rental_date');
+            $table->date('return_date');     
         });
     }
 

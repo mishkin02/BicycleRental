@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Bicycle_modelController;
+use App\Http\Controllers\BicycleController;
+use App\Http\Controllers\RentalContreller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +23,11 @@ Route::get('/', function () {
 Route::get('/hello', function () {
     return view('hello', ['title'=> 'Мишкин Илья']);
 });
+
+Route::get('/bicycleModel', [Bicycle_modelController::class, 'index']);
+
+Route::get('/bicycleModel/{id}', [Bicycle_modelController::class, 'show']);
+
+Route::get('/bicycle', [BicycleController::class, 'index']);
+
+Route::get('/rentals/{id}', [RentalContreller::class, 'show']);
