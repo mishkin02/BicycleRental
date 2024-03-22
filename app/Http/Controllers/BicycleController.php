@@ -33,13 +33,13 @@ class BicycleController extends Controller
      */
     public function store(Request $request)
     {
-        $valudated = $request->validate([
-            'model_id'=> 'required|integer',
+        $validated = $request->validate([
+            'location' => 'required|max:255',
             'status'=> 'required|boolean',
-            'location' => 'required|max:255'
+            'bicycle_model_id'=> 'required|integer',
         ]);
 
-        $bicycle = new Bicycle($valudated);
+        $bicycle = Bicycle::create($validated );
         $bicycle->save();
         return redirect('/bicycle');
     }

@@ -33,16 +33,16 @@
         <br><br>
 
         <label for="model_id">Модель</label>
-        <select name="model_id" value="{{old('model_id')}}">
+        <select name="bicycle_model_id" value="{{old('bicycle_model_id')}}">
             @foreach ($models as $model)
                 <option value="{{$model->id}}"
-                    @if(old('model_id') == $model->id) selected 
+                    @if(old('bicycle_model_id') == $model->id) selected 
                     @endif>
                     {{$model->name}}
                 </option>
             @endforeach
         </select>
-        @error('model_id')
+        @error('bicycle_model_id')
         <div class="is-invalid">{{ $message }}</div> 
         @enderror
 

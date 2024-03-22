@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Bicycle extends Model
 {
+    protected $fillable = [
+        'location', 'status', 'bicycle_model_id'
+    ];
     use HasFactory;
     public function bicycleModel(): BelongsTo
     {
