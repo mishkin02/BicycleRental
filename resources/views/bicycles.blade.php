@@ -30,5 +30,6 @@
             @endforeach
         </tbody>
     </table>
+    {{ $bicycles->links() }}
 </body>
 </html>

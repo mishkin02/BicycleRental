@@ -11,10 +11,11 @@ class BicycleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $perpage = $request->perpage ?? 2;
         return view("bicycles", [
-            'bicycles'=> Bicycle::all()
+            'bicycles'=> Bicycle::paginate($perpage)->withQueryString()
         ]);
     }
 
