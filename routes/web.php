@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Bicycle_modelController;
 use App\Http\Controllers\BicycleController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RentalContreller;
 use Illuminate\Support\Facades\Route;
 
@@ -32,12 +33,22 @@ Route::get('/bicycle', [BicycleController::class, 'index']);
 
 Route::get('/rentals/{id}', [RentalContreller::class, 'show']);
 
-Route::get('/bicycle_create', [BicycleController::class, 'create']);
-
 Route::post('/bicycle', [BicycleController::class, 'store']);
 
-Route::get('/bicycle/edit/{id}', [BicycleController::class, 'edit']);
+Route::get('/bicycle_create', [BicycleController::class, 'create'])->middleware('auth');
 
-Route::post('/bicycle/update/{id}', [BicycleController::class, 'update']);
+Route::get('/bicycle/edit/{id}', [BicycleController::class, 'edit'])->middleware('auth');
 
-Route::get('/bicycle/destroy/{id}', [BicycleController::class, 'destroy']);
+Route::post('/bicycle/update/{id}', [BicycleController::class, 'update'])->middleware('auth');
+
+Route::get('/bicycle/destroy/{id}', [BicycleController::class, 'destroy'])->middleware('auth');
+
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+
+Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::post('/auth', [LoginController::class, 'authenticate']);
+
+Route::get('/error', function(){
+    return view('error', ['message'=> session('message')]);
+});

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bicycle;
 use App\Models\Bicycle_model;
+use Gate;
 use Illuminate\Http\Request;
 
 class BicycleController extends Controller
@@ -88,6 +89,10 @@ class BicycleController extends Controller
      */
     public function destroy(string $id)
     {
+        if(!Gate::allows('destroy-bicycle', Bicycle::all()->where('id', $id)->first()))
+        {
+            return redirect('/error')->with('message', 'У вас нет прав на удаление велосипеда с id = '.$id);
+        }
         Bicycle::destroy($id);
         return redirect('/bicycle');
     }
