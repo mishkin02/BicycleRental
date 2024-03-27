@@ -40,9 +40,11 @@ class BicycleController extends Controller
             'status'=> 'required|boolean',
             'bicycle_model_id'=> 'required|integer',
         ]);
+        dd(")))))))");
 
         $bicycle = Bicycle::create($validated );
         $bicycle->save();
+        
         return redirect('/bicycle');
     }
 

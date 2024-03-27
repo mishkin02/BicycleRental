@@ -1,35 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>605-01</title>
-</head>
-<body>
-    <h2>Список велосипедов</h2>
-    <table>
-        <thead>
-            <td>id</td>
-            <td>Статус</td>
-            <td>Модель</td>
-            <td>Местонахождение</td>
-            <td>Действия</td>
-        </thead>
-        <tbody>
+@extends('layout')
+@section('content')
+<h2 class="text-center">Список велосипедов</h2>
+<div class="container-fluid d-flex  justify-content-center align-items-center">
+    <div class="row justify-content-center">
+        <div class="col-12">
             @foreach ($bicycles as $bicycle)
-                <tr>
-                    <td>{{$bicycle->id}}</td>
-                    <td>{{$bicycle->status ? "Доступен" : "Не доступен"}}</td>
-                    <td>{{$bicycle->bicycleModel->name}}</td>
-                    <td>{{$bicycle->location}}</td>
-                    <td>
-                        <a href="{{url('bicycle/destroy/'.$bicycle->id)}}">Удалить</a>
-                        <a href="{{url('bicycle/edit/'.$bicycle->id)}}">Изменить</a>
-                    </td>
-                </tr>
+            <div class="card text-center m-5" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Велосипед {{$bicycle->id}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Модель {{$bicycle->bicycleModel->name}}</h6>
+                    <p class="card-text">Местонахождение: {{$bicycle->location}}</p>
+                    <p class="card-text">{{$bicycle->status ? "Доступен для проката" : "Не доступен для проката"}}</p>
+
+                    <a class="btn btn-primary" href="{{url('bicycle/destroy/'.$bicycle->id)}}">Удалить</a>
+                    <a class="btn btn-primary" href="{{url('bicycle/edit/'.$bicycle->id)}}">Изменить</a>
+                </div>
+            </div>
             @endforeach
-        </tbody>
-    </table>
-    {{ $bicycles->links() }}
-</body>
-</html>
+        </div>
+    </div>
+</div>
+
+{{ $bicycles->links() }}
+@endsection

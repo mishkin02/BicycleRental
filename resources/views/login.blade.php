@@ -1,40 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>605-01</title>
-    <style> .is-invalid { color : red; }</style>
-</head>
-<body>
-    @if($user)
-        <h2>Здравствуйте, {{$user->name}}</h2>
-        <a href="{{url('logout')}}">Выйти</a>
-    @else
-        <h2>Вход</h2>
-        <form action="{{url('auth')}}" method="post">
-        @csrf
-            <label for="email">Почта:</label>
-            <input type="email" name="email" value="{{old('email')}}">
-            @error('email')
-            <div class="is-invalid"> {{$message}}</div>
+@extends('layout')
+@section('content')
+<div class="container-fluid d-flex h-100 justify-content-center align-items-center m-5">
+    <div class="row mt-4">
+        <div class="col">
+            <h2 class="text-center">Вход</h2>
+            <form action="{{url('auth')}}" method="post" >
+            @csrf
+                <div class="form-outline mb-4">
+                    <input type="email" class="form-control" name="email"  value="{{old('email')}}" aria-describedby="emailHelp" placeholder="Почта"> 
+                    @error('email')
+                    <div class="is-invalid"> {{$message}}</div>
+                    @enderror
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="password" class="form-control" name="password" value="{{old('password')}}" placeholder="Пароль">
+                    @error('password')
+                    <div class="is-invalid"> {{$message}}</div>
+                    @enderror
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100">Войти</button>
+            </form>
+            @error('error')
+                <div class="is-invalid">{{ $message }}</div>
             @enderror
+        </div>
+    </div>    
+</div>
 
-            <br><br>
-
-            <label for="password">Пароль:</label>
-            <input type="password" name="password" value="{{old('password')}}">
-            @error('password')
-            <div class="is-invalid"> {{$message}}</div>
-            @enderror
-
-            <br><br>
-            
-            <input type="submit">
-        </form>
-        @error('error')
-            <div class="is-invalid">{{ $message }}</div>
-        @enderror
-    @endif
-</body>
-</html>
+@endsection

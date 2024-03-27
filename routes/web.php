@@ -3,6 +3,7 @@
 use App\Http\Controllers\Bicycle_modelController;
 use App\Http\Controllers\BicycleController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RentalContreller;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::get('/bicycleModel/{id}', [Bicycle_modelController::class, 'show']);
 
 Route::get('/bicycle', [BicycleController::class, 'index']);
 
-Route::get('/rentals/{id}', [RentalContreller::class, 'show']);
+Route::get('/rentals/{id}', [RentalContreller::class, 'show'])->middleware('auth');
 
 Route::post('/bicycle', [BicycleController::class, 'store']);
 
@@ -48,6 +49,10 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::post('/auth', [LoginController::class, 'authenticate']);
+
+Route::get('/register', [RegisterController::class, 'register'])->name('login');
+
+Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/error', function(){
     return view('error', ['message'=> session('message')]);
