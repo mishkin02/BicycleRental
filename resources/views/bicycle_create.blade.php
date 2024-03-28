@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="m-4">
-                    <label class="form-label" for="model_id">Модель</label>
-                    <select class="form-select" name="model_id" value="{{old('model_id')}}">
+                    <label class="form-label" for="bicycle_model_id">Модель</label>
+                    <select class="form-select" name="bicycle_model_id" value="{{old('bicycle_model_id')}}">
                     @foreach ($models as $model)
                         <option value="{{$model->id}}"
                             @if(old('bicycle_model_id') == $model->id) selected 

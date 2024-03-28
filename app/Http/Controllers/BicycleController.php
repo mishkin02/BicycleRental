@@ -36,16 +36,17 @@ class BicycleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'location' => 'required|max:255',
-            'status'=> 'required|boolean',
-            'bicycle_model_id'=> 'required|integer',
+            'status'=> ['required','boolean'],
+            'bicycle_model_id'=> ['required','integer'],
+            'location' => ['max:255'],
         ]);
-        dd(")))))))");
-
+        
         $bicycle = Bicycle::create($validated );
         $bicycle->save();
-        
-        return redirect('/bicycle');
+
+        return redirect()->intended('bicycle')->withErrors([
+            'success' => 'Вы успешно добавили велосипед'
+        ]);
     }
 
     /**
@@ -93,9 +94,13 @@ class BicycleController extends Controller
     {
         if(!Gate::allows('destroy-bicycle', Bicycle::all()->where('id', $id)->first()))
         {
-            return redirect('/error')->with('message', 'У вас нет прав на удаление велосипеда с id = '.$id);
+            return redirect()->intended('bicycle')->withErrors([
+                'error' => 'У вас нет прав на удаление этого велосипеда',
+            ]);
         }
         Bicycle::destroy($id);
-        return redirect('/bicycle');
+        return redirect()->intended('bicycle')->withErrors([
+            'success' => 'Вы успешно удалили велосипед с id = '.$id,
+        ]);;
     }
 }

@@ -3,7 +3,7 @@
 <div class="container-fluid d-flex h-100 justify-content-center align-items-center m-5">
     <div class="row mt-4">
         <div class="col">
-            <h2 class="text-center">Регистрация</h2>
+            <h2 class="text-center mb-4">Регистрация</h2>
             <form action="{{url('auth')}}" method="post" >
             @csrf
                 <div class="form-outline mb-4">
